@@ -7,7 +7,6 @@ import hbs from 'hbs';
 import hbsutils from 'hbs-utils';
 
 import indexRouter from './routes/index';
-import usersRouter from './routes/users';
 
 var app = express();
 
@@ -22,9 +21,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/assets/jquery', express.static(`${__dirname}/node_modules/jquery/dist`));
+app.use('/assets/bootstrap', express.static(`${__dirname}/node_modules/bootstrap/dist`));
+app.use('/assets/font-awesome', express.static(`${__dirname}/node_modules/font-awesome`));
+app.use('/assets/img', express.static(`${__dirname}/public/images`));
+app.use('/assets/js', express.static(`${__dirname}/public/javascripts`));
+app.use('/assets/css', express.static(`${__dirname}/public/stylesheets`));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
